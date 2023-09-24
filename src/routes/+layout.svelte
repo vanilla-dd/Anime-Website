@@ -2,7 +2,7 @@
 	import { preparePageTransition } from '$lib/viewTransition';
 	import '../app.postcss';
 	preparePageTransition();
-
+	import { Toaster } from 'svelte-french-toast';
 	// import { onNavigate } from '$app/navigation';
 	// export const preparePageTransition = () => {
 	// 	// before completing the navigation, start a new transition
@@ -24,4 +24,5 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
+<Toaster />
 <slot />

@@ -1,10 +1,10 @@
 <script lang="ts">
 	export let data;
-	const animeInfo = data.animeInfo;
+	// const animeInfo = data.animeInfo;
 </script>
 
-<img src={animeInfo.image} alt="" style:--planet="image-{data.id}" />
-<h1>{animeInfo.title}</h1>
+<img src={data.animeInfo.image} alt="" style:--planet="image-{data.id}" loading="lazy" />
+<h1>{data.animeInfo.title}</h1>
 
 <style>
 	img {
