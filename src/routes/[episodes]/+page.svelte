@@ -8,7 +8,7 @@
 		{episode.id}
 		<!-- {episode.description} -->
 		{episode.title}
-		<img src={episode.image} alt="" class="block" width="200" />
+		<img src={episode.image} alt="" class="block" width="200" loading="lazy" />
 	{/each}
 </div>
 
