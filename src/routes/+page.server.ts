@@ -1,9 +1,11 @@
-import { anilist } from '$lib/server/anilist';
+import type { IAnimeResult, ISearch } from '@consumet/extensions';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ fetch }) => {
 	async function trendingAnime() {
-		const { results } = await anilist.fetchTrendingAnime(1, 20);
+		const data = await fetch(`https://api.consumet.org/meta/anilist/trending?page=1&perPage=20`);
+		const { results } = (await data.json()) as ISearch<IAnimeResult>;
+
 		const miniFiedResults = results.map((result, index) => {
 			return {
 				id: result.id,

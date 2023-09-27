@@ -1,14 +1,61 @@
-import { anilist } from '$lib/server/anilist';
+import type { IAnimeInfo } from '@consumet/extensions';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ params, fetch }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	const data = async () => {
-		// const { image, title } = await anilist.fetchAnimeInfo(params.animeId);
+		// FASTER THAN LIB
 		const data = await fetch(`https://api.consumet.org/meta/anilist/info/${params.animeId}`);
-		const { image, title } = await data.json();
+		const {
+			image,
+			title,
+			cover,
+			description,
+			endDate,
+			episodes,
+			genres,
+			hasDub,
+			hasSub,
+			isAdult,
+			countryOfOrigin,
+			recommendations,
+			rating,
+			relations,
+			season,
+			releaseDate,
+			startDate,
+			status,
+			studios,
+			synonyms,
+			totalEpisodes,
+			trailer,
+			type,
+			color
+		} = (await data.json()) as IAnimeInfo;
 		return {
 			image,
-			title
+			title,
+			cover,
+			description,
+			endDate,
+			episodes,
+			genres,
+			hasDub,
+			hasSub,
+			isAdult,
+			countryOfOrigin,
+			recommendations,
+			rating,
+			relations,
+			season,
+			releaseDate,
+			startDate,
+			status,
+			studios,
+			synonyms,
+			totalEpisodes,
+			trailer,
+			type,
+			color
 		};
 	};
 	return {

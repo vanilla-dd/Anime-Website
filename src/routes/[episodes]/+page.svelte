@@ -4,12 +4,9 @@
 
 <!-- {JSON.stringify(data.episodesList)} -->
 <div class="flex flex-wrap gap-2">
-	{#each data.episodesList as episode}
-		{episode.id}
-		<!-- {episode.description} -->
-		{episode.title}
-		<img src={episode.image} alt="" class="block" width="200" loading="lazy" />
+	{#each data.episodesList.episodes as episode}
+		<a class="card-hover border p-2" href={`${data.episodesList.id}/${episode.id}`}
+			>{episode.number}</a
+		>
 	{/each}
 </div>
-
-<a href={`/145064/${data.episodesList[1].id}`}>Watch</a>
