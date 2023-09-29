@@ -1,6 +1,7 @@
 <script lang="ts">
-	export let data;
 	import { CassetteTape, Heart } from 'lucide-svelte';
+	import toast from 'svelte-french-toast';
+	export let data;
 	function formatAiringTimeInHours(timeUntilAiring: number) {
 		const timeUntilAiringMs = timeUntilAiring * 1000;
 		if (timeUntilAiringMs >= 86400000) {
@@ -24,6 +25,11 @@
 		});
 </script>
 
+<svelte:head>
+	<meta property="og:image" content={data.animeInfo.image} />
+	<meta property="og:title" content={`Watch ${data.animeInfo.title.romaji}`} />
+	<meta property="og:description" content={data.animeInfo.description?.slice(0, 50)} />
+</svelte:head>
 <div class="relative w-full overflow-hidden">
 	<img
 		class="pointer-events-none absolute h-full scale-125 touch-none object-cover object-center opacity-40 blur-md grayscale"
@@ -36,7 +42,7 @@
 			src={data.animeInfo.image}
 			alt=""
 			loading="lazy"
-			style:--planet="image-{data.id}"
+			style:--anime="image-{data.animeInfo.id}"
 		/>
 		<ol class="breadcrumb mt-1">
 			<li class="crumb">
@@ -72,7 +78,7 @@
 					&#x25CF
 					<p class="flex items-center">
 						<Heart class="w-4 fill-red-600 stroke-white" />
-						{data.animeInfo.rating}
+						{data.animeInfo.rating ?? 'N/A'}
 					</p>
 				</li>
 				<li class="crumb flex gap-1">
@@ -85,18 +91,28 @@
 				</li>
 			</ul>
 		</div>
-		{data.animeInfo.color}
 		<div>
-			{#if data.animeInfo.totalEpisodes && data.animeInfo.totalEpisodes > 0 && data?.animeInfo?.episodes}
+			{#if data.animeInfo.totalEpisodes && data.animeInfo.totalEpisodes > 0 && data?.animeInfo?.episodes && data.animeInfo.episodes.length > 0}
 				<a
-					class="text-md btn font-semibold text-black"
+					class="text-md btn rounded-md px-4 py-2 font-semibold text-black"
 					style="background-color: {data.animeInfo.color ?? 'yellow'};"
-					href={`/anime/${data.id}/${data.animeInfo.episodes[0].id}`}>Watch Now</a
+					href={`/anime/${data.animeInfo.id}/${data.animeInfo.episodes[0].id}`}>Watch Now</a
+				>
+			{:else}
+				<button
+					on:click={() => toast.error('No Episodes 😭')}
+					class="variant-filled-primary btn rounded-md px-4 font-semibold"
+					>No Episodes Availabel Right Now...</button
 				>
 			{/if}
 		</div>
 		<div>
-			<p>{@html data.animeInfo.description}</p>
+			<p>
+				{@html data.animeInfo.description?.slice(
+					0,
+					data.animeInfo.description?.lastIndexOf('(Source')
+				)}
+			</p>
 		</div>
 	</main>
 </div>
@@ -112,6 +128,6 @@
 <style>
 	img {
 		/* width: 100%; */
-		view-transition-name: var(--planet);
+		view-transition-name: var(--anime);
 	}
 </style>

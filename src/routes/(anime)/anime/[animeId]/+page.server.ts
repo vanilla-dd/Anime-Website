@@ -15,8 +15,6 @@ export const load: PageServerLoad = async ({ params }) => {
 			endDate,
 			episodes,
 			genres,
-			hasDub,
-			hasSub,
 			isAdult,
 			countryOfOrigin,
 			recommendations,
@@ -48,8 +46,6 @@ export const load: PageServerLoad = async ({ params }) => {
 			endDate,
 			episodes,
 			genres,
-			hasDub,
-			hasSub,
 			isAdult,
 			countryOfOrigin,
 			recommendations,
@@ -68,7 +64,6 @@ export const load: PageServerLoad = async ({ params }) => {
 		};
 	};
 	return {
-		animeInfo: data(),
-		id: params.animeId
+		animeInfo: data()
 	};
 };

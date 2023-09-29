@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { ITitle } from '@consumet/extensions';
-
 	interface minifiedResults {
 		id: string;
 		image: string | undefined;
@@ -10,9 +9,9 @@
 	export let animeList: minifiedResults[];
 </script>
 
-<div class="flex flex-wrap gap-2">
+<div class="hide-scrollbar flex gap-2 overflow-scroll p-2">
 	{#each animeList as anime}
-		<div class="flex rounded-lg px-1">
+		<div class="flex flex-shrink-0 rounded-lg px-1">
 			<div class="flex flex-col items-center justify-end gap-2 pr-2 text-end">
 				<h1
 					style="text-orientation: sideways; writing-mode: vertical-rl; "
@@ -35,7 +34,7 @@
 					src={anime.image}
 					alt={''}
 					loading="lazy"
-					style:--planet="image-{anime.id}"
+					style:--anime="image-{anime.id}"
 				/>
 			</a>
 		</div>
@@ -45,6 +44,6 @@
 <style>
 	img {
 		/* transition: all 0.3s ease; */
-		view-transition-name: var(--planet);
+		view-transition-name: var(--anime);
 	}
 </style>
