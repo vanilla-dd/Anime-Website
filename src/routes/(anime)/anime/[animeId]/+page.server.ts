@@ -1,5 +1,6 @@
 import type { IAnimeInfo } from '@consumet/extensions';
 import type { PageServerLoad } from './$types';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const data = async () => {
@@ -34,6 +35,9 @@ export const load: PageServerLoad = async ({ params }) => {
 			duration,
 			nextAiringEpisode
 		} = (await data.json()) as IAnimeInfo;
+		if (!id) {
+			throw error(404, 'Cannot Find Anime');
+		}
 		return {
 			nextAiringEpisode,
 			duration,

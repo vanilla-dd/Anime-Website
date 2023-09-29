@@ -26,6 +26,10 @@
 </script>
 
 <svelte:head>
+	{#if !data}
+		<meta property="og:image" content="https://anime-website-omega.vercel.app/404_page.jpg" />
+		<meta property="og:title" content={'$page.error?.message'} />
+		<meta property="og:description" content="wandered off somewhere??" />{/if}
 	<meta property="og:image" content={data.animeInfo.image} />
 	<meta property="og:title" content={`Watch ${data.animeInfo.title.romaji}`} />
 	<meta property="og:description" content="Just Watch It 😄" />
