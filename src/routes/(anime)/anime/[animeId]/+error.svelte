@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	console.log($page);
 </script>
 
 <svelte:head>
-	<meta property="og:image" content="https://anime-website-omega.vercel.app/404_page.jpg" />
+	<meta property="og:image" content="" />
 	<meta property="og:title" content={$page.error?.message} />
 	<meta property="og:description" content="wandered off somewhere??" />
 </svelte:head>

@@ -4,7 +4,7 @@
 		id: string;
 		image: string | undefined;
 		title: string | ITitle;
-		number: number;
+		number: number | null;
 	}
 	export let animeList: minifiedResults[];
 </script>
@@ -20,10 +20,12 @@
 					{anime.title.romaji.toLowerCase()}
 				</h1>
 				<p class="text-lg font-bold">
-					{#if anime.number < 10}
-						0{anime.number}
-					{:else}
-						{anime.number}
+					{#if anime.number}
+						{#if anime.number < 10}
+							0{anime.number}
+						{:else}
+							{anime.number}
+						{/if}
 					{/if}
 				</p>
 			</div>

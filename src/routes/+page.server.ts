@@ -1,40 +1,16 @@
 import type { IAnimeResult, ISearch } from '@consumet/extensions';
 import type { PageServerLoad } from './$types';
-// export declare enum MediaFormat {
-// 	TV = 'TV',
-// 	TV_SHORT = 'TV_SHORT',
-// 	MOVIE = 'MOVIE',
-// 	SPECIAL = 'SPECIAL',
-// 	OVA = 'OVA',
-// 	ONA = 'ONA',
-// 	MUSIC = 'MUSIC',
-// 	MANGA = 'MANGA',
-// 	NOVEL = 'NOVEL',
-// 	ONE_SHOT = 'ONE_SHOT'
-// }
-// interface RecentEpisodes {
-// 	id: string;
-// 	malId: number | string;
-// 	title: string | ITitle;
-// 	image: string | undefined;
-// 	rating: number | null;
-// 	color: string | null;
-// 	episodeId: string;
-// 	episodeTitle: string;
-// 	episodeNumber: number;
-// 	type: MediaFormat;
-// 	genres?: string[];
-// }
+
 export const load: PageServerLoad = async ({ fetch }) => {
 	async function recentEpisodes() {
 		const data = await fetch('https://api.consumet.org/meta/anilist/popular?page=1&perPage=20');
 		const { results } = (await data.json()) as ISearch<IAnimeResult>;
-		const miniFiedResults = results.map((result, index) => {
+		const miniFiedResults = results.map((result) => {
 			return {
 				id: result.id,
 				image: result.image,
 				title: result.title,
-				number: index + 1
+				number: null
 			};
 		});
 		return miniFiedResults;
@@ -46,8 +22,8 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			return {
 				id: result.id,
 				image: result.image,
-				title: result.title,
-				number: index + 1
+				number: index + 1,
+				title: result.title
 			};
 		});
 		return miniFiedResults;
