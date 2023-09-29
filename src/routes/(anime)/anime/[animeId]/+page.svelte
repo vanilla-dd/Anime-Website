@@ -28,7 +28,7 @@
 <svelte:head>
 	<meta property="og:image" content={data.animeInfo.image} />
 	<meta property="og:title" content={`Watch ${data.animeInfo.title.romaji}`} />
-	<meta property="og:description" content={data.animeInfo.description?.slice(0, 50)} />
+	<meta property="og:description" content="Just Watch It 😄" />
 </svelte:head>
 <div class="relative w-full overflow-hidden">
 	<img
