@@ -6,7 +6,9 @@ export const load: PageServerLoad = async ({ params }) => {
 	const data = async () => {
 		// FASTER THAN LIB
 
-		const data = await fetch(`https://api.consumet.org/meta/anilist/info/${params.animeId}`);
+		const data = await fetch(
+			`https://consument-psi.vercel.app/meta/anilist/info/${params.animeId}`
+		);
 		const {
 			id,
 			image,

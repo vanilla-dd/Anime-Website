@@ -18,22 +18,9 @@
 			unsubscribe();
 		});
 	});
-	function getUrl(quality: string) {
-		for (const urlData of data.animeWatch.sources) {
-			if (urlData.quality === quality) {
-				return urlData.url;
-			}
-		}
-		return null; // Quality not found
-	}
 
 	// Get the URL of the default quality or fallback to backup
-	const defaultUrl = getUrl('default');
-	const backupUrl = getUrl('backup');
-	const finalUrl = defaultUrl ? defaultUrl : backupUrl;
 </script>
-
-{JSON.stringify(data.animeWatch.sources)}
 
 <media-player
 	key-disabled
