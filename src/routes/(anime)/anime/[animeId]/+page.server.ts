@@ -33,12 +33,14 @@ export const load: PageServerLoad = async ({ params }) => {
 			color,
 			subOrDub,
 			duration,
-			nextAiringEpisode
+			nextAiringEpisode,
+			popularity
 		} = (await data.json()) as IAnimeInfo;
 		if (!id) {
 			throw error(404, 'Cannot Find Anime');
 		}
 		return {
+			popularity,
 			nextAiringEpisode,
 			duration,
 			subOrDub,

@@ -21,8 +21,25 @@
 			month: 'short',
 			day: 'numeric',
 			hour: 'numeric',
-			timeZoneName: 'shortOffset'
+			timeZoneName: 'shortGeneric'
 		});
+
+	function dateFormat(
+		month: number | undefined,
+		year: number | undefined,
+		day: number | undefined
+	) {
+		const dateFormatter = new Intl.DateTimeFormat('en-US', {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric'
+		});
+		const date = new Date(`${month} ${day}, ${year}`);
+		// Format the date using the Intl.DateTimeFormat object
+		const formattedDate = dateFormatter.format(date);
+
+		return formattedDate;
+	}
 </script>
 
 <svelte:head>
@@ -37,9 +54,9 @@
 		alt=""
 	/>
 	<main class="grid grid-cols-3">
-		<div>
+		<div class="justify-self-center">
 			<img
-				class="w-96"
+				class="w-80"
 				src={data.animeInfo.image}
 				alt=""
 				loading="lazy"
@@ -47,13 +64,14 @@
 			/>
 		</div>
 		<div class="flex flex-col gap-4">
-			<ol class="breadcrumb mt-1">
+			<ol class="breadcrumb ml-1">
 				<li class="crumb">
-					<a class="anchor no-underline" href="/">Home</a>
+					<a class="anchor font-bold no-underline hover:underline" href="/">Home</a>
 				</li>
 				<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 				<li class="crumb">
-					<a class="anchor no-underline" href="/">{data.animeInfo.type}</a>
+					<a class="anchor font-bold no-underline hover:underline" href="/">{data.animeInfo.type}</a
+					>
 				</li>
 				<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 				<li class="max-w-[20ch] truncate font-semibold">{data.animeInfo.title.romaji}</li>
@@ -120,23 +138,112 @@
 					Add To List</button
 				>
 			</div>
-			<div>
-				<p>
-					{@html data.animeInfo.description?.slice(
-						0,
-						data.animeInfo.description?.lastIndexOf('(Source')
-					)}
-				</p>
+			<div class="max-h-[23rem] overflow-scroll will-change-scroll">
+				{#if data.animeInfo.description && data.animeInfo.description.length > 50}
+					<p class="font-semibold first-letter:text-2xl">
+						{@html data.animeInfo.description?.slice(
+							0,
+							data.animeInfo.description?.lastIndexOf('(S')
+						)}
+					</p>
+				{:else}
+					<p>Description Not Available</p>
+				{/if}
 			</div>
 		</div>
-		<div>
-			{#if data.animeInfo.nextAiringEpisode}
-				{formatAiringTimeAsDate(data.animeInfo.nextAiringEpisode.airingTime)}
-				{formatAiringTimeInHours(data.animeInfo.nextAiringEpisode.timeUntilAiring)}
-				{data.animeInfo.nextAiringEpisode.episode}
-			{:else}
-				<p class="font-bold">N/A</p>
-			{/if}
+		<div class=" flex w-full flex-col gap-2 place-self-center px-3">
+			<div class="flex gap-1">
+				<h1 class="text-base font-bold underline underline-offset-2">Next Ep. In</h1>
+				:
+				<div>
+					{#if data.animeInfo.nextAiringEpisode}
+						{formatAiringTimeAsDate(data.animeInfo.nextAiringEpisode.airingTime)}
+						<div class="flex">
+							( {formatAiringTimeInHours(data.animeInfo.nextAiringEpisode.timeUntilAiring)} )
+						</div>
+						<h1>
+							Ep No. :
+							{data.animeInfo.nextAiringEpisode.episode}
+						</h1>
+					{:else}
+						<p class="font-bold">N/A</p>
+					{/if}
+				</div>
+			</div>
+			<div class="flex max-w-min truncate">
+				<h1 class="text-md font-bold underline underline-offset-1">Synonyms</h1>
+				<p>
+					: {data.animeInfo.synonyms}
+				</p>
+			</div>
+			<div class="flex">
+				<h1 class="text-md font-bold underline underline-offset-1">Status</h1>
+				<p>
+					: {data.animeInfo.status}
+				</p>
+			</div>
+			<div class="flex">
+				<h1 class="text-md font-bold underline underline-offset-1">Origin</h1>
+				<p>
+					: {data.animeInfo.countryOfOrigin}
+				</p>
+			</div>
+			<div class="flex">
+				<h1 class="text-md font-bold underline underline-offset-1">Duration</h1>
+				<p>
+					: {data.animeInfo.duration}
+				</p>
+			</div>
+			<div class="flex">
+				<h1 class="text-md font-bold underline underline-offset-1">Popularity</h1>
+				<p>
+					: {data.animeInfo.popularity}
+				</p>
+			</div>
+			<div class="flex">
+				<h1 class="text-md font-bold underline underline-offset-1">Premiered</h1>
+				<p class="capitalize">
+					: {data.animeInfo.season?.toLowerCase()}
+					{data.animeInfo.releaseDate}
+				</p>
+			</div>
+			<div class="flex">
+				<h1 class="text-md font-bold underline underline-offset-1">Aired</h1>
+				<p>
+					:
+					{dateFormat(
+						data.animeInfo.startDate?.month,
+						data.animeInfo.startDate?.year,
+						data.animeInfo.startDate?.day
+					)} to
+					{#if data.animeInfo.endDate?.day}
+						{dateFormat(
+							data.animeInfo.endDate?.month,
+							data.animeInfo.endDate?.year,
+							data.animeInfo.endDate?.day
+						)}
+					{:else}
+						?
+					{/if}
+				</p>
+			</div>
+			<div class="flex">
+				<h1 class="text-md font-bold underline underline-offset-1">Genres</h1>
+				<p class="flex gap-2">
+					: {#each data.animeInfo.genres || '' as gen}
+						<a
+							href="/tag/{gen.toLowerCase()}"
+							class="card-hover rounded-sm border px-2 font-thin hover:border-green-500">{gen}</a
+						>
+					{/each}
+				</p>
+			</div>
+			<div class="flex">
+				<h1 class="text-md font-bold underline underline-offset-1">Studios</h1>
+				<p>
+					: {data.animeInfo.studios}
+				</p>
+			</div>
 		</div>
 	</main>
 </div>
