@@ -53,33 +53,32 @@
 		src={data.animeInfo.cover}
 		alt=""
 	/>
-	<main class="grid grid-cols-3">
+	<main class="grid grid-cols-1 px-2 py-5">
 		<div class="justify-self-center">
 			<img
-				class="w-80"
+				class="w-56"
 				src={data.animeInfo.image}
 				alt=""
 				loading="lazy"
 				style:--anime="image-{data.animeInfo.id}"
 			/>
 		</div>
-		<div class="flex flex-col gap-4">
-			<ol class="breadcrumb ml-1">
-				<li class="crumb">
-					<a class="anchor font-bold no-underline hover:underline" href="/">Home</a>
-				</li>
-				<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-				<li class="crumb">
-					<a class="anchor font-bold no-underline hover:underline" href="/">{data.animeInfo.type}</a
-					>
-				</li>
-				<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-				<li class="max-w-[20ch] truncate font-semibold">{data.animeInfo.title.romaji}</li>
-			</ol>
-			<h1 class="text-5xl font-bold">
+		<ol class="breadcrumb hidden lg:flex">
+			<li class="crumb">
+				<a class="anchor font-bold no-underline hover:underline" href="/">Home</a>
+			</li>
+			<li class="crumb-separator" aria-hidden>&rsaquo;</li>
+			<li class="crumb">
+				<a class="anchor font-bold no-underline hover:underline" href="/">{data.animeInfo.type}</a>
+			</li>
+			<li class="crumb-separator" aria-hidden>&rsaquo;</li>
+			<li class="crumb max-w-[20ch] truncate font-semibold">{data.animeInfo.title.romaji}</li>
+		</ol>
+		<div class="flex flex-col gap-3">
+			<h1 class="pt-2 text-center text-xl font-bold">
 				{data.animeInfo.title.romaji}
 			</h1>
-			<div class="flex items-center gap-2 font-bold">
+			<div class="flex flex-wrap items-center justify-center gap-2 font-bold">
 				<span class="variant-filled chip py-1 text-[.6rem] font-bold hover:cursor-default"
 					>{data.animeInfo.isAdult ? 'R-rated' : 'PG-13'}</span
 				>
@@ -92,7 +91,7 @@
 					<CassetteTape class="h-4 w-4" />
 					{data.animeInfo.episodes?.length} / {data.animeInfo.totalEpisodes}
 				</span>
-				<ul class="flex items-center gap-2 text-sm">
+				<ul class="flex items-center gap-2 text-xs">
 					<li class="crumb flex gap-1">
 						&#x25CF;
 						<p>
@@ -116,31 +115,35 @@
 					</li>
 				</ul>
 			</div>
-			<div class="flex gap-5">
+			<div class="flex justify-center gap-5">
 				{#if data.animeInfo.totalEpisodes && data.animeInfo.totalEpisodes > 0 && data?.animeInfo?.episodes && data.animeInfo.episodes.length > 0}
 					<a
-						class="text-md btn flex gap-1 rounded-md px-4 py-2 font-semibold text-black"
+						class="btn flex gap-1 rounded-md px-2 py-1 text-xs font-semibold text-black"
 						style="background-color: {data.animeInfo.color ?? 'yellow'};"
 						href={`/anime/${data.animeInfo.id}/${data.animeInfo.episodes[0].id}`}
 					>
-						<Play class="w-5 fill-black" />
+						<Play class="w-4 fill-black" />
 						Watch Now</a
 					>
 				{:else}
 					<button
 						on:click={() => toast.error('No Episodes 😭')}
-						class="variant-filled-primary btn rounded-md px-4 font-semibold"
+						class="variant-filled-primary btn rounded-md px-2 font-semibold"
 						>No Episodes Availabel Right Now...</button
 					>
 				{/if}
-				<button class="variant-ghost-success btn flex gap-2 rounded-md" disabled>
-					<ListPlus />
+				<button
+					class="variant-ghost-success btn flex gap-1 rounded-md px-2 text-xs text-white"
+					disabled
+				>
+					<ListPlus class="w-4" />
 					Add To List</button
 				>
 			</div>
-			<div class="max-h-[23rem] overflow-scroll will-change-scroll">
+			<h1 class="text-xl font-semibold text-white  -mb-2">Overview :-</h1>
+			<div class="max-h-[8rem] overflow-scroll text-left will-change-scroll pl-3">
 				{#if data.animeInfo.description && data.animeInfo.description.length > 50}
-					<p class="font-semibold first-letter:text-2xl">
+					<p class="font-extralight  first-letter:text-1xl text-sm">
 						{@html data.animeInfo.description?.slice(
 							0,
 							data.animeInfo.description?.lastIndexOf('(S')
@@ -151,11 +154,11 @@
 				{/if}
 			</div>
 		</div>
-		<div class=" flex w-full flex-col gap-2 place-self-center px-3">
-			<div class="flex gap-1">
-				<h1 class="text-base font-bold underline underline-offset-2">Next Ep. In</h1>
+		<div class=" flex w-full flex-col gap-1 place-self-center px-3">
+			<div class="flex gap-1 items-center">
+				<h1 class="text-sm font-semibold">Next Ep. In</h1>
 				:
-				<div>
+				<div class="text-xs">
 					{#if data.animeInfo.nextAiringEpisode}
 						{formatAiringTimeAsDate(data.animeInfo.nextAiringEpisode.airingTime)}
 						<div class="flex">
@@ -166,50 +169,50 @@
 							{data.animeInfo.nextAiringEpisode.episode}
 						</h1>
 					{:else}
-						<p class="font-bold">N/A</p>
+						<p class="font-semibold">N/A</p>
 					{/if}
 				</div>
 			</div>
-			<div class="flex max-w-min truncate">
-				<h1 class="text-md font-bold underline underline-offset-1">Synonyms</h1>
-				<p>
-					: {data.animeInfo.synonyms}
+			<div class="flex max-w-min items-center gap-1">
+				<h1 class="text-sm font-semibold  ">Synonyms:</h1>
+				<p class="text-xs overflow-scroll hide-scrollbar whitespace-nowrap pr-2">
+					{data.animeInfo.synonyms}
 				</p>
 			</div>
-			<div class="flex">
-				<h1 class="text-md font-bold underline underline-offset-1">Status</h1>
-				<p>
+			<div class="flex items-center">
+				<h1 class="text-sm font-semibold  ">Status</h1>
+				<p class="text-xs">
 					: {data.animeInfo.status}
 				</p>
 			</div>
-			<div class="flex">
-				<h1 class="text-md font-bold underline underline-offset-1">Origin</h1>
-				<p>
+			<div class="flex items-center">
+				<h1 class="text-sm font-semibold  ">Origin</h1>
+				<p class="text-xs">
 					: {data.animeInfo.countryOfOrigin}
 				</p>
 			</div>
-			<div class="flex">
-				<h1 class="text-md font-bold underline underline-offset-1">Duration</h1>
-				<p>
+			<div class="flex items-center">
+				<h1 class="text-sm font-semibold  ">Duration</h1>
+				<p class="text-xs">
 					: {data.animeInfo.duration}
 				</p>
-			</div>
-			<div class="flex">
-				<h1 class="text-md font-bold underline underline-offset-1">Popularity</h1>
-				<p>
+			</div> 
+			<div class="flex items-center">
+				<h1 class="text-sm font-semibold  ">Popularity</h1>
+				<p class="text-xs">
 					: {data.animeInfo.popularity}
 				</p>
 			</div>
-			<div class="flex">
-				<h1 class="text-md font-bold underline underline-offset-1">Premiered</h1>
-				<p class="capitalize">
+			<div class="flex items-center">
+				<h1 class="text-sm font-semibold  ">Premiered</h1>
+				<p class="capitalize text-xs">
 					: {data.animeInfo.season?.toLowerCase()}
 					{data.animeInfo.releaseDate}
 				</p>
 			</div>
-			<div class="flex">
-				<h1 class="text-md font-bold underline underline-offset-1">Aired</h1>
-				<p>
+			<div class="flex items-center">
+				<h1 class="text-sm font-semibold  ">Aired</h1>
+				<p class="text-xs">
 					:
 					{dateFormat(
 						data.animeInfo.startDate?.month,
@@ -227,20 +230,20 @@
 					{/if}
 				</p>
 			</div>
-			<div class="flex">
-				<h1 class="text-md font-bold underline underline-offset-1">Genres</h1>
-				<p class="flex gap-2">
+			<div class="flex ">
+				<h1 class="text-sm font-semibold  ">Genres</h1>
+				<p class="flex flex-wrap gap-2 text-xs">
 					: {#each data.animeInfo.genres || '' as gen}
 						<a
 							href="/tag/{gen.toLowerCase()}"
-							class="card-hover rounded-sm border px-2 font-thin hover:border-green-500">{gen}</a
+							class="card-hover rounded-sm border px-1 font-thin hover:border-green-500">{gen}</a
 						>
 					{/each}
 				</p>
 			</div>
-			<div class="flex">
-				<h1 class="text-md font-bold underline underline-offset-1">Studios</h1>
-				<p>
+			<div class="flex items-center">
+				<h1 class="text-sm font-semibold  ">Studios</h1>
+				<p class="text-xs capitalize">
 					: {data.animeInfo.studios}
 				</p>
 			</div>
