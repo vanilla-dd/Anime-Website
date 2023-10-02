@@ -1,36 +1,39 @@
 <script lang="ts">
-	import 'vidstack/styles/defaults.css';
-	import 'vidstack/styles/community-skin/video.css';
-	import { defineCustomElements } from 'vidstack/elements';
+	import 'vidstack/player/styles/default/theme.css';
+	import 'vidstack/player/styles/default/layouts/video.css';
+	import 'vidstack/player/layouts';
+	import 'vidstack/player/ui';
+	import type { MediaPlayerElement } from 'vidstack/elements.js';
+	let player: MediaPlayerElement;
 	import { onMount } from 'svelte';
 	export let data;
 	onMount(async () => {
-		await defineCustomElements();
-		const player = document.querySelector('media-player');
-
-		player?.onAttach(() => {
-			player.currentTime = 100;
-			const unsubscribe = player.subscribe(({ paused, playing }) => {
-				console.log('Paused:', paused);
-				console.log('Playing:', playing);
-			});
-
-			unsubscribe();
-		});
+		player = (await import('vidstack/player')).default;
 	});
-
 	// Get the URL of the default quality or fallback to backup
 </script>
 
 <media-player
-	key-disabled
-	control
-	src={data.animeWatch.sources[4].url}
+	load="idle"
+	class="player aspect-video"
+	bind:this={player}
+	autoplay
 	crossorigin
-	aspect-ratio="16/9"
+	src={data.animeWatch.sources[4].url}
 >
-	<media-outlet></media-outlet>
-	<media-community-skin />
+	<media-provider> </media-provider>
+	<media-video-layout />
+	<media-menu>
+		<media-menu-button aria-label="Settings">
+			<media-icon type="settings" data-rotate></media-icon>
+		</media-menu-button>
+		<media-menu-items>
+			<media-menu>
+				<media-quality-menu-button label="Quality"></media-quality-menu-button>
+				<media-quality-menu-items auto-label="Auto"></media-quality-menu-items>
+			</media-menu>
+		</media-menu-items>
+	</media-menu>
 </media-player>
 <div class="flex flex-wrap gap-2">
 	{#each data.episodesList.episodes as episode}

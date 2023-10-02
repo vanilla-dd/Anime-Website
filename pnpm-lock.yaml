@@ -33,8 +33,8 @@ dependencies:
     specifier: ^1.2.0
     version: 1.2.0(svelte@4.2.1)
   vidstack:
-    specifier: ^0.6.13
-    version: 0.6.13
+    specifier: ^1.1.1
+    version: 1.1.1
   zod:
     specifier: ^3.22.2
     version: 3.22.2
@@ -492,10 +492,6 @@ packages:
       - encoding
       - supports-color
     dev: true
-
-  /@maverick-js/signals@5.11.4:
-    resolution: {integrity: sha512-fkUqNfnJK1kgfsKimaLp2jcfQr7NXwHZWBhqhQ3pifnYSZrBJv+4tU/klKyGf1mA33mVBYustCAgilJppzGjig==}
-    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1902,19 +1898,11 @@ packages:
       semver: 6.3.1
     dev: true
 
-  /maverick.js@0.37.0:
-    resolution: {integrity: sha512-1Dk/9rienLiihlktVvH04ADC2UJTMflC1fOMVQCCaQAaz7hgzDI5i0p/arFbDM52hFFiIcq4RdXtYz47SgsLgw==}
-    engines: {node: '>=16'}
-    dependencies:
-      '@maverick-js/signals': 5.11.4
-      type-fest: 3.13.1
-    dev: false
-
   /mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
 
-  /media-captions@0.0.18:
-    resolution: {integrity: sha512-JW18P6FuHdyLSGwC4TQ0kF3WdNj/+wMw2cKOb8BnmY6vSJGtnwJ+vkYj+IjHOV34j3XMc70HDeB/QYKR7E7fuQ==}
+  /media-captions@1.0.0:
+    resolution: {integrity: sha512-605d9sXW+DtJBNzzfL4N6NpOIjigN+kpzS+V1QaCiNNPB7G015/peyw6wfv9iCp8GAP6R5NPyAICZKeuqWPAQQ==}
     engines: {node: '>=16'}
     dev: false
 
@@ -2885,11 +2873,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /type-fest@3.13.1:
-    resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
-    engines: {node: '>=14.16'}
-    dev: false
-
   /typescript@5.2.2:
     resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
@@ -2923,13 +2906,11 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
-  /vidstack@0.6.13:
-    resolution: {integrity: sha512-g5wH6Hfc4EQqOI0Mm7qW4D1DWPZfQnlATLZuqpuVAKI8HOz4UGfd1v48MLK9cR+ZfPjVL4/iZLu7YOIdSX3L2g==}
-    engines: {node: '>=16'}
+  /vidstack@1.1.1:
+    resolution: {integrity: sha512-qaXKw2WX06MyTmrqA3ARjr+B3muaYXhp5zPF4OsKa5BbVowwHrOtrXx6N5zbtiCn/OwWHKsTRddJfBWG477j6Q==}
+    engines: {node: '>=18'}
     dependencies:
-      maverick.js: 0.37.0
-      media-captions: 0.0.18
-      type-fest: 3.13.1
+      media-captions: 1.0.0
     dev: false
 
   /vite@4.4.9(@types/node@20.6.3):
