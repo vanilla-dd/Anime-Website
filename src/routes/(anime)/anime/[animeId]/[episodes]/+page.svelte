@@ -10,7 +10,6 @@
 	onMount(async () => {
 		player = (await import('vidstack/player')).default;
 	});
-	// Get the URL of the default quality or fallback to backup
 </script>
 
 <media-player
@@ -20,20 +19,19 @@
 	autoplay
 	crossorigin
 	src={data.animeWatch.sources[4].url}
+	title={data.episodesList.title}
 >
 	<media-provider> </media-provider>
 	<media-video-layout />
-	<media-menu>
-		<media-menu-button aria-label="Settings">
-			<media-icon type="settings" data-rotate></media-icon>
-		</media-menu-button>
-		<media-menu-items>
-			<media-menu>
-				<media-quality-menu-button label="Quality"></media-quality-menu-button>
-				<media-quality-menu-items auto-label="Auto"></media-quality-menu-items>
-			</media-menu>
-		</media-menu-items>
-	</media-menu>
+	<media-menu-button aria-label="Settings">
+		<media-icon type="settings" data-rotate></media-icon>
+	</media-menu-button>
+	<media-menu-items>
+		<media-menu>
+			<media-quality-menu-button label="Quality"></media-quality-menu-button>
+			<media-quality-menu-items auto-label="Auto"></media-quality-menu-items>
+		</media-menu>
+	</media-menu-items>
 </media-player>
 <div class="flex flex-wrap gap-2">
 	{#each data.episodesList.episodes as episode}

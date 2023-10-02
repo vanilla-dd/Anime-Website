@@ -6,14 +6,17 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 		const data = await fetch(`https://consument-psi.vercel.app/meta/anilist/info/${params.animeId}
 		`);
 		const { episodes, id } = (await data.json()) as IAnimeInfo;
-		return { episodes: episodes as IAnimeEpisode[], id: id as string };
+		return {
+			episodes: episodes as IAnimeEpisode[],
+			id: id as string,
+			title: episodes ? episodes[Number(params.episodes.split('-').at(-1)!)].title : ''
+		};
 	}
 	const data = async () => {
 		const data = await fetch(
 			`https://consument-psi.vercel.app/meta/anilist/watch/${params.episodes}`
 		);
 		const { sources, download } = await data.json();
-		console.log(sources, download);
 		return {
 			sources,
 			download

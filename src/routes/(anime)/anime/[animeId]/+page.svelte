@@ -53,10 +53,10 @@
 		src={data.animeInfo.cover}
 		alt=""
 	/>
-	<main class="grid grid-cols-1 px-2 py-5 md:grid-cols-2 lg:grid-cols-3">
+	<main class="grid grid-cols-1 px-2 py-5 md:grid-cols-2 lg:grid-cols-3 lg:place-items-center">
 		<div class="justify-self-center md:justify-self-start lg:justify-self-center">
 			<img
-				class="w-52 lg:w-96"
+				class="w-52 lg:w-72 xl:w-96"
 				src={data.animeInfo.image}
 				alt="Anime"
 				loading="lazy"
@@ -125,7 +125,7 @@
 				<div class="flex justify-center gap-5 lg:justify-start">
 					{#if data.animeInfo.totalEpisodes && data.animeInfo.totalEpisodes > 0 && data?.animeInfo?.episodes && data.animeInfo.episodes.length > 0}
 						<a
-							class="btn flex gap-1 rounded-md px-2 py-1 text-xs font-semibold text-black lg:px-3 lg:py-2 lg:text-sm lg:font-bold"
+							class="btn flex gap-1 rounded-md px-4 py-1 text-xs font-semibold text-black lg:py-2 lg:text-sm lg:font-bold"
 							style="background-color: {data.animeInfo.color ?? 'yellow'};"
 							href={`/anime/${data.animeInfo.id}/${data.animeInfo.episodes[0].id}`}
 						>
@@ -140,7 +140,7 @@
 						>
 					{/if}
 					<button
-						class="variant-ghost-success btn flex gap-1 rounded-md px-2 text-xs text-white lg:px-3 lg:text-sm lg:font-bold"
+						class="variant-ghost-success btn flex gap-1 rounded-md px-4 text-xs text-white lg:text-sm lg:font-bold"
 						disabled
 					>
 						<ListPlus class="w-4 lg:w-5" />
@@ -148,13 +148,13 @@
 					>
 				</div>
 			</div>
-			<h1 class="-mb-2 text-xl font-semibold text-white lg:hidden">Overview :-</h1>
+			<h1 class="mb-1 mt-3 text-xl font-semibold text-white lg:hidden">Overview :-</h1>
 			<div
-				class="max-h-32 overflow-scroll pl-3 text-left will-change-scroll lg:mt-2 lg:max-h-[23rem] lg:pl-0"
+				class="max-h-32 overflow-scroll pl-3 text-left will-change-scroll lg:mt-2 lg:max-h-48 lg:pl-0 xl:max-h-[23rem]"
 			>
 				{#if data.animeInfo.description && data.animeInfo.description.length > 50}
 					<p
-						class="first-letter:text-1xl text-sm font-extralight lg:text-base lg:font-normal lg:first-letter:text-2xl"
+						class="first-letter:text-1xl text-sm font-extralight lg:text-base lg:font-normal lg:first-letter:text-2xl xl:font-medium"
 					>
 						{@html data.animeInfo.description?.slice(
 							0,
@@ -166,9 +166,9 @@
 				{/if}
 			</div>
 		</div>
-		<div class="flex w-full flex-col gap-1 place-self-center px-3">
+		<div class="flex w-full flex-col gap-2 place-self-center px-3">
 			<div class="flex items-center gap-1">
-				<h1 class="text-sm font-semibold">Next Ep. In</h1>
+				<h1 class="text-sm font-medium">Next Ep. In</h1>
 				:
 				<div class="text-xs">
 					{#if data.animeInfo.nextAiringEpisode}

@@ -41,14 +41,14 @@
 	"dependencies": {
 		"@auth/core": "^0.15.2",
 		"@auth/prisma-adapter": "^1.0.2",
-		"@auth/sveltekit": "^0.3.7",
+		"@auth/sveltekit": "^0.3.8",
 		"@consumet/extensions": "^1.5.2",
 		"@floating-ui/dom": "1.5.3",
 		"@prisma/client": "^5.3.1",
 		"hls.js": "^1.4.12",
 		"lucide-svelte": "^0.279.0",
 		"svelte-french-toast": "^1.2.0",
-		"vidstack": "^1.1.1",
+		"vidstack": "^1.1.4",
 		"zod": "^3.22.2"
 	}
 }
