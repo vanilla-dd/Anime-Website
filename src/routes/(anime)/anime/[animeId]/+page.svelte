@@ -54,11 +54,11 @@
 		alt=""
 	/>
 	<main class="grid grid-cols-1 px-2 py-5 md:grid-cols-2 lg:grid-cols-3">
-		<div class=" justify-self-center md:justify-self-start lg:justify-self-center">
+		<div class="justify-self-center md:justify-self-start lg:justify-self-center">
 			<img
-				class="w-56 lg:w-96"
+				class="w-52 lg:w-96"
 				src={data.animeInfo.image}
-				alt=""
+				alt="Anime"
 				loading="lazy"
 				style:--anime="image-{data.animeInfo.id}"
 			/>
@@ -121,6 +121,7 @@
 						</li>
 					</ul>
 				</div>
+
 				<div class="flex justify-center gap-5 lg:justify-start">
 					{#if data.animeInfo.totalEpisodes && data.animeInfo.totalEpisodes > 0 && data?.animeInfo?.episodes && data.animeInfo.episodes.length > 0}
 						<a
@@ -147,7 +148,6 @@
 					>
 				</div>
 			</div>
-
 			<h1 class="-mb-2 text-xl font-semibold text-white lg:hidden">Overview :-</h1>
 			<div
 				class="max-h-32 overflow-scroll pl-3 text-left will-change-scroll lg:mt-2 lg:max-h-[23rem] lg:pl-0"
@@ -166,7 +166,7 @@
 				{/if}
 			</div>
 		</div>
-		<div class="col-span-2 flex w-full flex-col gap-1 place-self-center px-3 lg:col-span-1">
+		<div class="flex w-full flex-col gap-1 place-self-center px-3">
 			<div class="flex items-center gap-1">
 				<h1 class="text-sm font-semibold">Next Ep. In</h1>
 				:
