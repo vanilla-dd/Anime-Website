@@ -1,16 +1,16 @@
 <script lang="ts">
 	import AnimeCard from '$lib/components/AnimeCard.svelte';
+	import OgTags from '$lib/components/OGTags.svelte';
 	export let data;
 </script>
 
-<svelte:head>
-	<meta
-		property="og:image"
-		content="https://anime-website-omega.vercel.app/mugiwara-the-illustration-vector.jpg"
-	/>
-	<meta property="og:title" content="Anime Webiste" />
-	<meta property="og:description" content="A aniWatch clone" />
-</svelte:head>
+<OgTags
+	image={'https://anime-website-omega.vercel.app/logo.jpg'}
+	title={'Anime Website'}
+	description={'Just a normal anime website'}
+/>
+<h1>Popular Animes</h1>
+<AnimeCard animeList={data.popularAnime} />
 <h1>Trending Animes</h1>
 <AnimeCard animeList={data.trendingAnime} />
 <h1>Recentely Updated Animes</h1>
