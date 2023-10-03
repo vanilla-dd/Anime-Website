@@ -9,9 +9,11 @@
 	title={'Anime Website'}
 	description={'Just a normal anime website'}
 />
-<h1>Popular Animes</h1>
-<AnimeCard animeList={data.popularAnime} />
-<h1>Trending Animes</h1>
-<AnimeCard animeList={data.trendingAnime} />
-<h1>Recentely Updated Animes</h1>
-<AnimeCard animeList={data.recentEpisodes} />
+<div>
+	<h1>Popular Animes</h1>
+	<AnimeCard animeList={data.popularAnime} />
+	<h1>Trending Animes</h1>
+	<AnimeCard animeList={data.trendingAnime} />
+	<h1>Airing Schulde Animes</h1>
+	<AnimeCard animeList={data.airingSchedule} />
+</div>

@@ -9,7 +9,11 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 		return {
 			episodes: episodes as IAnimeEpisode[],
 			id: id as string,
-			title: episodes ? episodes[Number(params.episodes.split('-').at(-1)!)].title : ''
+			title: episodes
+				? episodes[Number(params.episodes.split('-').at(-1)!)]
+					? episodes[Number(params.episodes.split('-').at(-1)!)].title
+					: ''
+				: ''
 		};
 	}
 	const data = async () => {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { CassetteTape, Heart, ListPlus, Play } from 'lucide-svelte';
 	import toast from 'svelte-french-toast';
-	import { dateFormat, formatAiringTimeAsDate, formatAiringTimeInHours } from './utils.js';
+	import { dateFormat, formatAiringTimeAsDate, formatAiringTimeInHours } from '$lib/utils.js';
 	import OgTags from '$lib/components/OGTags.svelte';
 	export let data;
 </script>

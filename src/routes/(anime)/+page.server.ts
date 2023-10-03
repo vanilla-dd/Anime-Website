@@ -2,7 +2,7 @@ import type { IAnimeResult, ISearch } from '@consumet/extensions';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	async function recentEpisodes() {
+	async function airingSchedule() {
 		const data = await fetch(
 			'https://consument-psi.vercel.app/meta/anilist/airing-schedule?page=1&perPage=20'
 		);
@@ -51,6 +51,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	return {
 		popularAnime: popularAnime(),
 		trendingAnime: trendingAnime(),
-		recentEpisodes: recentEpisodes()
+		airingSchedule: airingSchedule()
 	};
 };
