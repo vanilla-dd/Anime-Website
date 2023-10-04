@@ -11,7 +11,7 @@
 	title={data.animeInfo.title.romaji}
 	description={'Just Watch It'}
 />
-<div class="relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden">
+<div class="relative flex min-h-[90dvh] items-center justify-center overflow-hidden">
 	<img
 		class="pointer-events-none absolute h-full scale-125 touch-none object-cover object-center opacity-40 blur-md grayscale"
 		src={data.animeInfo.cover}
@@ -130,66 +130,64 @@
 				{/if}
 			</div>
 		</div>
-		<div class="flex w-full flex-col gap-2 place-self-center px-3">
+		<div class="first-letter: flex w-full flex-col gap-2 px-3 pt-3 md:gap-4 md:pt-0 lg:pl-5">
 			<div class="flex items-center gap-1">
-				<h1 class="text-sm font-medium">Next Ep. In</h1>
+				<h1 class="text-sm font-medium md:text-base lg:text-lg lg:font-semibold">Next Ep. In</h1>
 				:
-				<div class="text-xs">
+				<div class="text-xs md:text-sm lg:flex lg:items-center lg:justify-center lg:gap-4">
 					{#if data.animeInfo.nextAiringEpisode}
 						{formatAiringTimeAsDate(data.animeInfo.nextAiringEpisode.airingTime)}
-						<div class="flex">
-							( {formatAiringTimeInHours(data.animeInfo.nextAiringEpisode.timeUntilAiring)} )
-						</div>
+						({formatAiringTimeInHours(data.animeInfo.nextAiringEpisode.timeUntilAiring)})
 						<h1>
-							Ep No. :
-							{data.animeInfo.nextAiringEpisode.episode}
+							Ep No. : {data.animeInfo.nextAiringEpisode.episode}
 						</h1>
 					{:else}
 						<p class="font-semibold">N/A</p>
 					{/if}
 				</div>
-				<div></div>
 			</div>
 			<div class="flex max-w-min items-center gap-1">
-				<h1 class="text-sm font-semibold">Synonyms:</h1>
-				<p class="hide-scrollbar overflow-scroll whitespace-nowrap pr-2 text-xs">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Synonyms:</h1>
+				<p
+					class="hide-scrollbar overflow-scroll whitespace-nowrap pr-2 text-xs md:text-sm lg:text-base"
+				>
 					{data.animeInfo.synonyms}
 				</p>
 			</div>
 			<div class="flex items-center">
-				<h1 class="text-sm font-semibold">Status</h1>
-				<p class="text-xs">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Status</h1>
+				<p class="text-xs md:text-sm lg:text-base">
 					: {data.animeInfo.status}
 				</p>
 			</div>
 			<div class="flex items-center">
-				<h1 class="text-sm font-semibold">Origin</h1>
-				<p class="text-xs">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Origin</h1>
+				<p class="text-xs md:text-sm lg:text-base">
 					: {data.animeInfo.countryOfOrigin}
 				</p>
 			</div>
 			<div class="flex items-center">
-				<h1 class="text-sm font-semibold">Duration</h1>
-				<p class="text-xs">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Duration</h1>
+				<p class="text-xs md:text-sm lg:text-base">
 					: {data.animeInfo.duration}
 				</p>
 			</div>
 			<div class="flex items-center">
-				<h1 class="text-sm font-semibold">Popularity</h1>
-				<p class="text-xs">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Popularity</h1>
+				<p class="text-xs md:text-sm lg:text-base">
 					: {data.animeInfo.popularity}
 				</p>
 			</div>
 			<div class="flex items-center">
-				<h1 class="text-sm font-semibold">Premiered</h1>
-				<p class="text-xs capitalize">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Premiered</h1>
+				<p class="text-xs capitalize md:text-sm lg:text-base">
 					: {data.animeInfo.season?.toLowerCase()}
 					{data.animeInfo.releaseDate}
 				</p>
 			</div>
 			<div class="flex items-center">
-				<h1 class="text-sm font-semibold">Aired</h1>
-				<p class="text-xs">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Aired</h1>
+				<p class="text-xs md:text-sm lg:text-base">
 					:
 					{dateFormat(
 						data.animeInfo.startDate?.month,
@@ -208,8 +206,8 @@
 				</p>
 			</div>
 			<div class="flex">
-				<h1 class="text-sm font-semibold">Genres</h1>
-				<p class="flex flex-wrap gap-2 text-xs">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Genres</h1>
+				<p class="flex flex-wrap gap-2 text-xs md:text-sm lg:text-base">
 					: {#each data.animeInfo.genres || '' as gen}
 						<a
 							href="/tag/{gen.toLowerCase()}"
@@ -219,8 +217,8 @@
 				</p>
 			</div>
 			<div class="flex items-center">
-				<h1 class="text-sm font-semibold">Studios</h1>
-				<p class="text-xs capitalize">
+				<h1 class="text-sm font-semibold md:text-base lg:text-lg">Studios</h1>
+				<p class="text-xs capitalize md:text-sm lg:text-base">
 					: {data.animeInfo.studios}
 				</p>
 			</div>

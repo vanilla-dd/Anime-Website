@@ -7,6 +7,7 @@
 	let player: MediaPlayerElement;
 	import { onMount } from 'svelte';
 	export let data;
+	console.log(data.skipTime);
 	onMount(async () => {
 		player = (await import('vidstack/player')).default;
 	});

@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 				: ''
 		};
 	}
-	const data = async () => {
+	const animeWatch = async () => {
 		const data = await fetch(
 			`https://consument-psi.vercel.app/meta/anilist/watch/${params.episodes}`
 		);
@@ -26,8 +26,20 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 			download
 		};
 	};
+	// Get skip times
+	// https://api.aniskip.com/v2/skip-times/21/2?types=op&types=ed&episodeLength=0
+	const skipTime = async () => {
+		const data = await fetch(
+			`https://api.aniskip.com/v2/skip-times/${params.animeId}/${[
+				Number(params.episodes.split('-').at(-1)!)
+			]}?types=op&types=ed&episodeLength=0`
+		);
+		const res = await data.json();
+		return res;
+	};
 	return {
-		animeWatch: data(),
-		episodesList: getEpisodes()
+		animeWatch: animeWatch(),
+		episodesList: getEpisodes(),
+		skipTime: skipTime()
 	};
 };

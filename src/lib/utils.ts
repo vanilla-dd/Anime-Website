@@ -15,9 +15,9 @@ export const formatAiringTimeAsDate = (airingTime: number) =>
 	new Date(airingTime * 1000).toLocaleDateString('en-US', {
 		year: 'numeric',
 		month: 'short',
-		day: 'numeric',
-		hour: 'numeric',
-		timeZoneName: 'shortGeneric'
+		day: 'numeric'
+		// hour: 'numeric'
+		// timeZoneName: 'shortGeneric'
 	});
 
 export function dateFormat(
