@@ -1,3 +1,4 @@
+import type { IAnimeInfo } from '@consumet/extensions';
 import { json, type RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ fetch, request }) => {

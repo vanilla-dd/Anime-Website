@@ -1,5 +1,23 @@
 import type { IAnimeEpisode, IAnimeInfo } from '@consumet/extensions';
 import type { PageServerLoad } from './$types';
+type Interval = {
+	startTime: number;
+	endTime: number;
+};
+
+type SkipItem = {
+	interval: Interval;
+	skipType: string; // You might want to create an enum for skipType values
+	skipId: string;
+	episodeLength: number;
+};
+
+type SkipResponse = {
+	found: boolean;
+	results: SkipItem[];
+	message: string;
+	statusCode: number;
+};
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
 	async function getEpisodes() {
@@ -35,7 +53,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 			]}?types=op&types=ed&episodeLength=0`
 		);
 		const res = await data.json();
-		return res;
+		return res as SkipResponse;
 	};
 	return {
 		animeWatch: animeWatch(),

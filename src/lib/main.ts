@@ -1,4 +1,4 @@
-import Player from '../routes/(anime)/anime/[animeId]/[episodes]/+page.svelte';
+import Player from './components/Player.svelte';
 
 new Player({
 	target: document.getElementById('player')!
