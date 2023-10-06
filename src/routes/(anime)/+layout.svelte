@@ -52,17 +52,24 @@
 				</button>
 			</div>
 			<div
-				class="absolute top-full flex w-full flex-col gap-2 border border-gray-500 bg-slate-800"
+				class="absolute top-full flex w-full flex-col overflow-scroll border border-gray-500 bg-slate-800"
 				style="display:{shown ? 'flex' : 'none'}"
 			>
 				{#each searchAnime ?? '' as anime}
-					<a href={`/anime/${anime.id}`} on:click={() => (shown = false)} class="flex gap-3">
-						<img src={anime.image} alt="" class=" h-12 w-12 object-cover" />
+					<a
+						style:--anime="search-{anime.id}"
+						href={`/anime/${anime.id}`}
+						on:click={() => (shown = false)}
+						class="flex gap-3 py-2 hover:bg-white hover:text-black"
+					>
+						<img src={anime.image} alt="" class="h-12 w-12 object-contain" />
 						<div>
-							<h1>{anime.title.romaji}</h1>
-							<p class="text-[8px] font-bold">{anime.type}</p>
-							<p>{anime.totalEpisodes}</p>
-							<p>{anime.rating}</p>
+							<h1 class="max-w-[25ch] truncate font-bold">{anime.title.romaji}</h1>
+							<div class="flex gap-3 text-[10px] font-bold">
+								<p class="">{anime.type}</p>
+								<p>{anime.totalEpisodes}</p>
+								<p>{anime.rating}</p>
+							</div>
 						</div>
 					</a>
 				{/each}
@@ -78,3 +85,10 @@
 	</div>
 </nav>
 <slot />
+
+<style>
+	a {
+		/* transition: all 0.3s ease; */
+		view-transition-name: var(--anime);
+	}
+</style>

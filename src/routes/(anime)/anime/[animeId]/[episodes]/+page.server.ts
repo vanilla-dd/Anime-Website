@@ -20,6 +20,7 @@ type SkipResponse = {
 };
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
+	const epNo = Number(params.episodes.split('-').at(-1)!);
 	async function getEpisodes() {
 		const data = await fetch(`https://consument-psi.vercel.app/meta/anilist/info/${params.animeId}
 		`);
@@ -27,11 +28,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 		return {
 			episodes: episodes as IAnimeEpisode[],
 			id: id as string,
-			title: episodes
-				? episodes[Number(params.episodes.split('-').at(-1)!)]
-					? episodes[Number(params.episodes.split('-').at(-1)!)].title
-					: ''
-				: ''
+			title: episodes ? (episodes[epNo] ? episodes[epNo].title : '') : ''
 		};
 	}
 	const animeWatch = async () => {
@@ -48,9 +45,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 	// https://api.aniskip.com/v2/skip-times/21/2?types=op&types=ed&episodeLength=0
 	const skipTime = async () => {
 		const data = await fetch(
-			`https://api.aniskip.com/v2/skip-times/${params.animeId}/${[
-				Number(params.episodes.split('-').at(-1)!)
-			]}?types=op&types=ed&episodeLength=0`
+			`https://api.aniskip.com/v2/skip-times/${params.animeId}/${epNo}?types=op&types=ed&episodeLength=0`
 		);
 		const res = await data.json();
 		return res as SkipResponse;
@@ -58,6 +53,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 	return {
 		animeWatch: animeWatch(),
 		episodesList: getEpisodes(),
-		skipTime: skipTime()
+		skipTime: skipTime(),
+		epNo
 	};
 };
