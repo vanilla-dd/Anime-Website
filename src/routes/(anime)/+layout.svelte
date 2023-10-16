@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import type { IAnimeInfo, IAnimeResult, ISearch } from '@consumet/extensions';
+	import type { IAnimeInfo, ISearch } from '@consumet/extensions';
 	import { Search } from 'lucide-svelte';
 	// Define a debounce function
+	import { SlideToggle } from '@skeletonlabs/skeleton';
+	import { invalidateAll } from '$app/navigation';
+	import { subOrDub } from '$lib/store';
 	let searchAnime: IAnimeInfo[] = [];
 	function debounce(func: any, delay: number) {
 		let timeoutId: any;
@@ -74,6 +77,17 @@
 					</a>
 				{/each}
 			</div>
+		</div>
+		<div>
+			<button>
+				<SlideToggle
+					name="slider-label"
+					on:click={() => {
+						subOrDub.changeType();
+						console.log($subOrDub);
+					}}>On</SlideToggle
+				>
+			</button>
 		</div>
 		<div>
 			{#if $page.data}

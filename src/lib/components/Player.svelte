@@ -4,7 +4,12 @@
 	import 'vidstack/player/layouts';
 	import 'vidstack/player/ui';
 	import type { MediaPlayerElement } from 'vidstack/elements.js';
-	export let data;
+	export let url: string;
+	export let title: string;
+	export let sub: string;
+	export let thumb: string;
+	export let skipIntro: string;
+	export let skipOutro: string;
 	let player: MediaPlayerElement;
 	import { onMount } from 'svelte';
 	onMount(async () => {
@@ -12,14 +17,15 @@
 	});
 </script>
 
+{JSON.stringify(skipIntro)}
 <media-player
 	load="idle"
 	class="player aspect-video"
 	bind:this={player}
 	autoplay
+	{title}
 	crossorigin
-	src={data.animeWatch.sources[4].url}
-	title={data.episodesList.title}
+	src={`https://m3u8-proxy-cors-olive.vercel.app/cors?url=${url}`}
 >
 	<media-provider></media-provider>
 	<media-video-layout />
@@ -30,6 +36,10 @@
 		<media-menu>
 			<media-quality-menu-button label="Quality"></media-quality-menu-button>
 			<media-quality-menu-items auto-label="Auto"></media-quality-menu-items>
+		</media-menu>
+		<media-menu>
+			<media-captions-menu-button label="Captions"></media-captions-menu-button>
+			<media-captions-menu-items off-label="Off"></media-captions-menu-items>
 		</media-menu>
 	</media-menu-items>
 </media-player>

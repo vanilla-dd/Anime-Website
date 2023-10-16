@@ -1,59 +1,34 @@
-import type { IAnimeEpisode, IAnimeInfo } from '@consumet/extensions';
 import type { PageServerLoad } from './$types';
-type Interval = {
-	startTime: number;
-	endTime: number;
-};
+import { subOrDub } from '$lib/store';
 
-type SkipItem = {
-	interval: Interval;
-	skipType: string; // You might want to create an enum for skipType values
-	skipId: string;
-	episodeLength: number;
-};
-
-type SkipResponse = {
-	found: boolean;
-	results: SkipItem[];
-	message: string;
-	statusCode: number;
-};
-
-export const load: PageServerLoad = async ({ params, fetch }) => {
-	const epNo = Number(params.episodes.split('-').at(-1)!);
+export const load: PageServerLoad = async ({ params, url, fetch }) => {
+	const type = 'sub';
+	subOrDub.subscribe((value) => console.log(value));
+	const epNo = Number(url.searchParams.get('epNo'));
+	const ep = Number(url.searchParams.get('ep'));
 	async function getEpisodes() {
-		const data = await fetch(`https://consument-psi.vercel.app/meta/anilist/info/${params.animeId}
+		const data =
+			await fetch(`https://consument-psi.vercel.app/meta/anilist/info/${params.animeId}?provider=zoro
 		`);
-		const { episodes, id } = (await data.json()) as IAnimeInfo;
+		const { episodes, id } = await data.json();
 		return {
-			episodes: episodes as IAnimeEpisode[],
+			episodes: episodes,
 			id: id as string,
 			title: episodes ? (episodes[epNo] ? episodes[epNo].title : '') : ''
 		};
 	}
 	const animeWatch = async () => {
 		const data = await fetch(
-			`https://consument-psi.vercel.app/meta/anilist/watch/${params.episodes}`
+			`https://api.anify.tv/sources?providerId=zoro&watchId=/watch/${params.episodes}${
+				ep ? `?ep=${ep}` : ''
+			}&episodeNumber=${epNo}&id=${params.animeId}&subType=${type}`
 		);
-		const { sources, download } = await data.json();
-		return {
-			sources,
-			download
-		};
-	};
-	// Get skip times
-	// https://api.aniskip.com/v2/skip-times/21/2?types=op&types=ed&episodeLength=0
-	const skipTime = async () => {
-		const data = await fetch(
-			`https://api.aniskip.com/v2/skip-times/${params.animeId}/${epNo}?types=op&types=ed&episodeLength=0`
-		);
-		const res = await data.json();
-		return res as SkipResponse;
+		const { sources, intro, outro, subtitles, error } = await data.json();
+		return { sources, intro, outro, subtitles, error };
 	};
 	return {
 		animeWatch: animeWatch(),
 		episodesList: getEpisodes(),
-		skipTime: skipTime(),
 		epNo
 	};
 };

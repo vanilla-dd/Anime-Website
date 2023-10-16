@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		// FASTER THAN LIB
 
 		const data = await fetch(
-			`https://consument-psi.vercel.app/meta/anilist/info/${params.animeId}`
+			`https://consument-psi.vercel.app/meta/anilist/info/${params.animeId}?provider=zoro`
 		);
 		const {
 			id,
