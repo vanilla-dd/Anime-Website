@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import Player from '$lib/components/Player.svelte';
 	export let data;
 </script>
@@ -18,10 +19,12 @@
 				skipOutro={data.animeWatch.outro}
 			/>
 		</div>
-		<div class="flex flex-wrap content-start items-start justify-start gap-4">
+		<div
+			class="mt-10 flex max-h-96 flex-wrap content-start items-start justify-start gap-4 overflow-scroll"
+		>
 			{#each data.episodesList.episodes as episode}
 				<a
-					class="card-hover chip border p-3"
+					class="card-hover chip border px-3 py-2"
 					style="background-color: {data.epNo === Number(episode.number) ? 'white' : ''};"
 					href={`${episode.url?.slice(episode.url.lastIndexOf('/') + 1)}&epNo=${episode.number}
 					`}>{episode.number}</a

@@ -33,7 +33,9 @@
 				<img
 					class="h-full w-52 object-cover"
 					style="image-rendering: optimizeSpeed;"
-					src={anime.image}
+					src={`
+					https://consument-psi.vercel.app/utils/image-proxy?url=${anime.image}&headers={}&referer=https://s4.anilist.co
+					`}
 					alt={''}
 					loading="lazy"
 					style:--anime="image-{anime.id}"
