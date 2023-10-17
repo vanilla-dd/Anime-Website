@@ -14,6 +14,4 @@
 	<AnimeCard animeList={data.popularAnime} />
 	<h1>Trending Animes</h1>
 	<AnimeCard animeList={data.trendingAnime} />
-	<h1>Airing Schulde Animes</h1>
-	<AnimeCard animeList={data.airingSchedule} />
 </div>

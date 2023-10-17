@@ -29,17 +29,13 @@
 >
 	<media-provider></media-provider>
 	<media-video-layout />
-	<media-menu-button aria-label="Settings">
-		<media-icon type="settings" data-rotate></media-icon>
-	</media-menu-button>
-	<media-menu-items>
-		<media-menu>
+	<media-menu>
+		<media-menu-button aria-label="Settings">
+			<media-icon type="settings" data-rotate></media-icon>
+		</media-menu-button>
+		<media-menu-items>
 			<media-quality-menu-button label="Quality"></media-quality-menu-button>
 			<media-quality-menu-items auto-label="Auto"></media-quality-menu-items>
-		</media-menu>
-		<media-menu>
-			<media-captions-menu-button label="Captions"></media-captions-menu-button>
-			<media-captions-menu-items off-label="Off"></media-captions-menu-items>
-		</media-menu>
-	</media-menu-items>
+		</media-menu-items>
+	</media-menu>
 </media-player>
