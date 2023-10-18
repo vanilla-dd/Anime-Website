@@ -1,9 +1,7 @@
 import type { PageServerLoad } from './$types';
-import { subOrDub } from '$lib/store';
 
 export const load: PageServerLoad = async ({ params, url, fetch }) => {
-	const type = 'dub';
-	subOrDub.subscribe((value) => console.log(value));
+	const type = 'sub';
 	const epNo = Number(url.searchParams.get('epNo'));
 	const ep = Number(url.searchParams.get('ep'));
 	async function getEpisodes() {

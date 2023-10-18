@@ -6,8 +6,6 @@
 	import type { MediaPlayerElement } from 'vidstack/elements.js';
 	export let url: string;
 	export let title: string;
-	export let sub: string;
-	export let thumb: string;
 	export let skipIntro: string;
 	export let skipOutro: string;
 	let player: MediaPlayerElement;

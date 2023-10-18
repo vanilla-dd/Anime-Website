@@ -91,9 +91,11 @@
 						<a
 							class="btn flex gap-1 rounded-md px-4 py-1 text-xs font-semibold text-black lg:py-2 lg:text-sm lg:font-bold"
 							style="background-color: {data.animeInfo.color ?? 'yellow'};"
-							href={`/anime/${data.animeInfo.id}${data.animeInfo.episodes[0].url?.slice(
-								data.animeInfo.episodes[0].url.lastIndexOf('/')
-							)}&epNo=${data.animeInfo.episodes[0].number}`}
+							href={`/anime/${data.animeInfo.id}/${
+								data.animeInfo.episodes[0].id.split('/')[2] ??
+								data.animeInfo.episodes[0].url?.split('/watch/')[1]
+							}&epNo=${data.animeInfo.episodes[0].number}
+							`}
 						>
 							<Play class="w-4 fill-black lg:w-5" />
 							Watch Now</a

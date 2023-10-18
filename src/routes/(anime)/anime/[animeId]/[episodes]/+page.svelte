@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import Player from '$lib/components/Player.svelte';
 	export let data;
 </script>
@@ -13,8 +12,6 @@
 			<Player
 				title={data.episodesList.title}
 				url={data.animeWatch.sources.at(-1).url}
-				sub={data.animeWatch.subtitles[0].url}
-				thumb={data.animeWatch.subtitles.at(-1).url}
 				skipIntro={data.animeWatch.intro}
 				skipOutro={data.animeWatch.outro}
 			/>
@@ -26,8 +23,10 @@
 				<a
 					class="card-hover chip border px-3 py-2"
 					style="background-color: {data.epNo === Number(episode.number) ? 'white' : ''};"
-					href={`${episode.url?.slice(episode.url.lastIndexOf('/') + 1)}&epNo=${episode.number}
-					`}>{episode.number}</a
+					href={`${episode.id.split('/')[2] ?? episode.url?.split('/watch/')[1]}&epNo=${
+						episode.number
+					}
+ `}>{episode.number}</a
 				>
 			{/each}
 		</div>
