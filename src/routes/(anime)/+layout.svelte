@@ -4,9 +4,9 @@
 	import { Search } from 'lucide-svelte';
 	// Define a debounce function
 	import { SlideToggle } from '@skeletonlabs/skeleton';
-	import { invalidateAll } from '$app/navigation';
 	import { subOrDub } from '$lib/store';
 	let searchAnime: IAnimeInfo[] = [];
+	let searchInput: HTMLInputElement;
 	function debounce(func: any, delay: number) {
 		let timeoutId: any;
 
@@ -21,9 +21,7 @@
 		const data = await fetch('/api/search', { method: 'POST', body: JSON.stringify(searchTerm) });
 		const res: ISearch<IAnimeInfo> = await data.json();
 		// Perform your desired action here, e.g., make an API request
-		console.log(res.results);
 		searchAnime = res.results;
-		console.log(searchAnime);
 	}, 700);
 	// Function to be debounced (e.g., an event handler)
 	function handleInputChange(e: any) {
@@ -41,29 +39,28 @@
 	</a>
 	<div class="flex items-center gap-5">
 		<div class="relative">
-			<div class="input-group input-group-divider grid-cols-[auto_1fr_auto] rounded-sm">
-				<input
-					type="text"
-					on:input={(e) => {
-						handleInputChange(e);
-					}}
-					class="input py-[6px] lg:w-64"
-					placeholder="Search Anime"
-				/>
-				<button class="input-group-shim btn rounded-none py-1">
-					<Search class="w-5" />
-				</button>
-			</div>
+			<input
+				bind:this={searchInput}
+				type="text"
+				on:input={(e) => {
+					handleInputChange(e);
+				}}
+				class="input rounded-none py-[6px] lg:w-80"
+				placeholder="Search Anime"
+			/>
 			<div
-				class="absolute top-full flex w-full flex-col overflow-scroll border border-gray-500 bg-slate-800"
+				class="absolute top-full flex max-h-[22rem] w-full flex-col overflow-y-scroll border border-gray-500 bg-slate-800"
 				style="display:{shown ? 'flex' : 'none'}"
 			>
 				{#each searchAnime ?? '' as anime}
 					<a
 						style:--anime="search-{anime.id}"
 						href={`/anime/${anime.id}`}
-						on:click={() => (shown = false)}
-						class="flex gap-3 py-2 hover:bg-white hover:text-black"
+						on:click={() => {
+							shown = false;
+							searchInput.value = '';
+						}}
+						class="flex gap-3 border-b py-2 hover:bg-white hover:text-black"
 					>
 						<img src={anime.image} alt="" class="h-12 w-12 object-contain" />
 						<div>
