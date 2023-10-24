@@ -34,8 +34,8 @@
 >
 	<media-provider>
 		{#each subtitle as sub}
-			` {#if sub.lang === 'Thumbnails'}
-				{''}`
+			{#if sub.lang === 'Thumbnails'}
+				{''}
 			{:else}
 				<track
 					src={`https://cors-anywhere-e65k.onrender.com/${sub.url}`}

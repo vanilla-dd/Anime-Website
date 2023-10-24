@@ -4,7 +4,7 @@ import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = async ({ fetch }) => {
 	async function trendingAnime() {
 		const data = await fetch(
-			`https://consument-psi.vercel.app/meta/anilist/trending?page=1&perPage=20`
+			'https://consument-psi.vercel.app/meta/anilist/trending?page=1&perPage=20'
 		);
 		const { results } = (await data.json()) as ISearch<IAnimeResult>;
 		const miniFiedResults = results.map((result, index) => {
@@ -19,7 +19,7 @@ export const load: PageServerLoad = async ({ fetch }) => {
 	}
 	async function popularAnime() {
 		const data = await fetch(
-			`https://consument-psi.vercel.app/meta/anilist/popular?page=1&perPage=20`
+			encodeURIComponent('https://consument-psi.vercel.app/meta/anilist/popular?page=1&perPage=20')
 		);
 		const { results } = (await data.json()) as ISearch<IAnimeResult>;
 		const miniFiedResults = results.map((result) => {
