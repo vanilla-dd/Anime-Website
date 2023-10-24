@@ -11,6 +11,7 @@
 		<div class="col-span-2">
 			<Player
 				title={data.episodesList.title}
+				subtitle={data.animeWatch.subtitles}
 				url={data.animeWatch.sources.at(-1).url}
 				skipIntro={data.animeWatch.intro}
 				skipOutro={data.animeWatch.outro}

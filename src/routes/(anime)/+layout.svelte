@@ -54,7 +54,6 @@
 			>
 				{#each searchAnime ?? '' as anime}
 					<a
-						style:--anime="search-{anime.id}"
 						href={`/anime/${anime.id}`}
 						on:click={() => {
 							shown = false;
@@ -66,9 +65,9 @@
 						<div>
 							<h1 class="max-w-[25ch] truncate font-bold">{anime.title.romaji}</h1>
 							<div class="flex gap-3 text-[10px] font-bold">
-								<p class="">{anime.type}</p>
+								<p>{anime.type}</p>
 								<p>{anime.totalEpisodes}</p>
-								<p>{anime.rating}</p>
+								<p>❤️{anime.rating}</p>
 							</div>
 						</div>
 					</a>
@@ -96,10 +95,3 @@
 	</div>
 </nav>
 <slot />
-
-<style>
-	a {
-		/* transition: all 0.3s ease; */
-		view-transition-name: var(--anime);
-	}
-</style>
