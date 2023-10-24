@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Player from '$lib/components/Player.svelte';
 	export let data;
 </script>
 
@@ -9,13 +8,18 @@
 	<h1 class="my-3 w-fit text-3xl font-bold">{data?.episodesList?.title ?? 'N/A'}</h1>
 	<div class="grid grid-cols-1 gap-5 lg:grid-cols-3">
 		<div class="col-span-2">
-			<Player
-				title={data.episodesList.title}
-				subtitle={data.animeWatch.subtitles}
-				url={data.animeWatch.sources.at(-1).url}
-				skipIntro={data.animeWatch.intro}
-				skipOutro={data.animeWatch.outro}
-			/>
+			{#await import('$lib/components/player/main.js')}
+				<div class="aspect-video h-full w-full bg-black"></div>
+			{:then { Player }}
+				<svelte:component
+					this={Player}
+					title={data.episodesList.title}
+					subtitle={data.animeWatch.subtitles}
+					url={data.animeWatch.sources.at(-1).url}
+					skipOutro={data.animeWatch.outro}
+					skipIntro={data.animeWatch.intro}
+				/>
+			{/await}
 		</div>
 		<div
 			class="mt-10 flex max-h-96 flex-wrap content-start items-start justify-start gap-4 overflow-scroll"
@@ -26,7 +30,7 @@
 					style="background-color: {data.epNo === Number(episode.number) ? 'white' : ''};"
 					href={`${episode.id.split('/')[2] ?? episode.url?.split('/watch/')[1]}&epNo=${
 						episode.number
-					}
+					}		
  `}>{episode.number}</a
 				>
 			{/each}
