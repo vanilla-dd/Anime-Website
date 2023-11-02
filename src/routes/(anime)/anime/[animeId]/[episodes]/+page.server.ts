@@ -17,11 +17,9 @@ export const load: PageServerLoad = async ({ params, url, fetch }) => {
 	}
 	const animeWatch = async () => {
 		const data = await fetch(
-			encodeURIComponent(
-				`https://api.anify.tv/sources?providerId=zoro&watchId=/watch/${params.episodes}${
-					ep ? `?ep=${ep}` : ''
-				}&episodeNumber=${epNo}&id=${params.animeId}&subType=${type}`
-			)
+			`https://api.anify.tv/sources?providerId=zoro&watchId=/watch/${params.episodes}${
+				ep ? `?ep=${ep}` : ''
+			}&episodeNumber=${epNo}&id=${params.animeId}&subType=${type}`
 		);
 		const { sources, intro, outro, subtitles, error } = await data.json();
 		return { sources, intro, outro, subtitles, error };
