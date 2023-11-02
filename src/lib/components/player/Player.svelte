@@ -6,7 +6,7 @@
 	import 'vidstack/player/layouts';
 	import 'vidstack/player/ui';
 	import type { MediaPlayerElement } from 'vidstack/elements.js';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	export let url: string;
 	export let title: string;
 	export let subtitle: title[];
@@ -17,6 +17,10 @@
 		lang: string;
 	};
 	let player: MediaPlayerElement;
+
+	onMount(() => {
+		player = player;
+	});
 	onDestroy(() => {
 		player.destroy();
 	});
