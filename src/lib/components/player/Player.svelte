@@ -17,7 +17,6 @@
 		lang: string;
 	};
 	let player: MediaPlayerElement;
-
 	onMount(() => {
 		player = player;
 	});

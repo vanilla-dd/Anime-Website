@@ -26,6 +26,7 @@
 		>
 			{#each data.episodesList.episodes as episode}
 				<a
+					data-sveltekit-reload
 					class="card-hover chip border px-3 py-2"
 					style="background-color: {data.epNo === Number(episode.number) ? 'white' : ''};"
 					href={`${episode.id.split('/')[2] ?? episode.url?.split('/watch/')[1]}&epNo=${
